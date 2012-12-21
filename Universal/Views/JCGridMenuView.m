@@ -60,9 +60,8 @@
 }
 
 
-- (void)show
+- (void)show:(void (^)(void))completeBlock
 {
-    _isExpanded = NO;
     CGFloat centerX = self.layer.position.x;
     CGFloat centerY = self.layer.position.y;
     
@@ -99,9 +98,10 @@
                                              options: UIViewAnimationCurveLinear
                                           animations:^{
                                               [self.layer setPosition:CGPointMake(xEnd, yEnd)];
-                                          } 
+                                          }
                                           completion:^(BOOL finished){
-                                          }];    
+                                              completeBlock();
+                                          }];
                      
                      }];    
     

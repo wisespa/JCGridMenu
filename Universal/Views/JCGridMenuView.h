@@ -41,7 +41,7 @@
 #pragma mark - Display
 
 - (void)clear;
-- (void)show;
+- (void)show:(void (^)(void))completeBlock;
 - (void)hide;
 
 #pragma mark - Selections

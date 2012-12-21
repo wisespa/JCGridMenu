@@ -55,7 +55,10 @@
 }
 
 #pragma mark - Open and Close
-
+- (BOOL)showed
+{
+    return !(_gridCells == nil);
+}
 - (void)open
 {
     [self closeRemoveExisting];
@@ -82,7 +85,12 @@
         [[_gridCells objectAtIndex:i] setAlpha:1.0];
         [[_gridCells objectAtIndex:i] setFrame:CGRectMake(self.view.frame.size.width, 0, self.view.frame.size.width+88, 44)];
         [self.view addSubview:[_gridCells objectAtIndex:i]];
-        [[_gridCells objectAtIndex:i] performSelector:@selector(show) withObject:nil afterDelay:delay];
+        JCGridMenuView* menuView = (JCGridMenuView*) [_gridCells objectAtIndex:i];
+        [menuView show:^{
+            if ([menuView isExpanded]) {
+                [self expand:i];
+            }
+        }];
         delay += 0.1;
     }
         
@@ -97,7 +105,8 @@
         [[_gridCells objectAtIndex:i] hide];
         delay += 0.4;
     }
-
+    
+    _gridCells = nil;
 }
 
 - (void)closeRemoveExisting

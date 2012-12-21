@@ -38,10 +38,11 @@
 @property NSInteger tag;
 
 - (id)initWithFrame:(CGRect)frame rows:(NSArray *)initRows tag:(NSInteger)initTag;
-
 #pragma mark - Open and Close
 
 - (void)open;
 - (void)close;
-
+- (BOOL)showed;
+- (void)expand:(NSInteger)row;
+- (void)collapse:(NSInteger)row;
 @end
