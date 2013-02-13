@@ -213,7 +213,10 @@
 
 - (void)jcGridMenuViewColumnSelected:(NSInteger)indexColumn
 {
-    //NSLog(@"jcGridMenuViewColumnSelected %i", _tag);
+    if (_rowSelected == -1) {
+        // row not selected
+        return;
+    }
     
     if ([self.delegate respondsToSelector:@selector(jcGridMenuColumnSelected:indexRow:indexColumn:)]) {
         NSInteger columnInRow = indexColumn - ((_rowSelected+1) * 100);
